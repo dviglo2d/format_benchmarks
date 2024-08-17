@@ -1,0 +1,24 @@
+[submodule "third_party/benchmark/repo"]
+	path = third_party/benchmark/repo
+	url = https://github.com/google/benchmark
+	shallow = true
+[submodule "third_party/pugixml/repo"]
+	path = third_party/pugixml/repo
+	url = https://github.com/zeux/pugixml
+	shallow = true
+[submodule "third_party/rapidjson/repo"]
+	path = third_party/rapidjson/repo
+	url = https://github.com/Tencent/rapidjson
+	shallow = true
+[submodule "third_party/rapidyaml/repo"]
+	path = third_party/rapidyaml/repo
+	url = https://github.com/biojppm/rapidyaml
+	shallow = true
+[submodule "third_party/yaml-cpp/repo"]
+	path = third_party/yaml-cpp/repo
+	url = https://github.com/jbeder/yaml-cpp
+	shallow = true
+[submodule "third_party/hjson-cpp/repo"]
+	path = third_party/hjson-cpp/repo
+	url = https://github.com/hjson/hjson-cpp
+	shallow = true
