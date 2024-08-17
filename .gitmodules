@@ -1,0 +1,12 @@
+[submodule "third_party/benchmark/repo"]
+	path = third_party/benchmark/repo
+	url = https://github.com/google/benchmark
+	shallow = true
+[submodule "third_party/pugixml/repo"]
+	path = third_party/pugixml/repo
+	url = https://github.com/zeux/pugixml
+	shallow = true
+[submodule "third_party/rapidjson/repo"]
+	path = third_party/rapidjson/repo
+	url = https://github.com/Tencent/rapidjson
+	shallow = true
