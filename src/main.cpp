@@ -12,11 +12,8 @@
 static void save_xml()
 {
     const char* xml_src =
-        "<window title='Окно'>"
-        "    <controls>"
-        "        <button text='Кнопка' />"
-        "    </controls>"
-        "</window>";
+        #include "xml_1.inl"
+        ;
 
     pugi::xml_document doc;
     doc.load(xml_src);
@@ -35,19 +32,8 @@ static void save_json()
     namespace rj = rapidjson;
 
     const char* json_src =
-        "{"
-        "    \"window\":"
-        "    {"
-        "        \"title\":\"Окно\","
-        "        \"controls\":"
-        "        ["
-        "            {"
-        "                \"type\":\"button\","
-        "                \"text\":\"Кнопка\""
-        "            }"
-        "        ]"
-        "    }"
-        "}";
+        #include "json_1.inl"
+        ;
 
     rj::Document doc;
     doc.Parse(json_src);

@@ -24,7 +24,7 @@ if(MSVC)
 endif()
 
 set(target_name format_benchmarks)
-file(GLOB source_files src/*.cpp src/*.hpp)
+file(GLOB source_files src/*.cpp src/*.hpp src/*.inl)
 add_executable(${target_name} ${source_files})
 target_link_libraries(${target_name} PRIVATE benchmark::benchmark pugixml::pugixml rapidjson)
 set_property(DIRECTORY ${CMAKE_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${target_name})
