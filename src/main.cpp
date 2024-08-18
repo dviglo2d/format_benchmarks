@@ -9,6 +9,19 @@
 #include <rapidjson/stringbuffer.h>
 
 
+static void save_file(const rapidjson::Document& doc, const char* filename)
+{
+    namespace rj = rapidjson;
+
+    static char buffer[65536];
+
+    FILE* fp = fopen(filename, "wb");
+    rj::FileWriteStream stream(fp, buffer, sizeof(buffer));
+    rj::PrettyWriter<rapidjson::FileWriteStream> writer(stream);
+    doc.Accept(writer);
+    fclose(fp);
+}
+
 static void save_xml()
 {
     const char* xml_src =
@@ -29,21 +42,13 @@ BENCHMARK(bm_save_xml);
 
 static void save_json()
 {
-    namespace rj = rapidjson;
-
     const char* json_src =
         #include "json_1.inl"
         ;
 
-    rj::Document doc;
+    rapidjson::Document doc;
     doc.Parse(json_src);
-
-    FILE* fp = fopen("out.json", "wb");
-    static char write_buffer[65536];
-    rj::FileWriteStream os(fp, write_buffer, sizeof(write_buffer));
-    rj::PrettyWriter<rapidjson::FileWriteStream> writer(os);
-    doc.Accept(writer);
-    fclose(fp);
+    save_file(doc, "out.json");
 }
 
 static void bm_save_json(benchmark::State& state)
