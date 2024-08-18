@@ -10,3 +10,7 @@
 	path = third_party/rapidjson/repo
 	url = https://github.com/Tencent/rapidjson
 	shallow = true
+[submodule "third_party/rapidyaml/repo"]
+	path = third_party/rapidyaml/repo
+	url = https://github.com/biojppm/rapidyaml
+	shallow = true
