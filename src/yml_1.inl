@@ -1,0 +1,7 @@
+R"(
+window:
+  title: Окно
+  controls:
+  - type: button
+    text: Кнопка
+)"

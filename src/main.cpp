@@ -28,6 +28,15 @@ static void save_file(const rapidjson::Document& doc, const char* filename)
     fclose(fp);
 }
 
+static void save_file(const ryml::Tree& tree, const char* filename)
+{
+    namespace rj = rapidjson;
+
+    FILE* fp = fopen(filename, "wb");
+    ryml::emit_yaml(tree, tree.root_id(), fp);
+    fclose(fp);
+}
+
 
 static void save_xml()
 {
@@ -67,18 +76,22 @@ static void bm_save_json(benchmark::State& state)
 BENCHMARK(bm_save_json);
 
 
-static void save_yaml()
+static void save_yml()
 {
-    char yml_buf[] = "{foo: 1, bar: [2, 3], john: doe}";
-    ryml::Tree tree = ryml::parse_in_place(yml_buf);
+    static const ryml::csubstr yml_src =
+        #include "yml_1.inl"
+        ;
+
+    ryml::Tree tree = ryml::parse_in_arena(yml_src);
+    save_file(tree, "out.yml");
 }
 
-static void bm_save_yaml(benchmark::State& state)
+static void bm_save_yml(benchmark::State& state)
 {
     for (auto _ : state)
-        save_yaml();
+        save_yml();
 }
-BENCHMARK(bm_save_yaml);
+BENCHMARK(bm_save_yml);
 
 
 BENCHMARK_MAIN();
