@@ -1,7 +1,7 @@
 R"(
 <window title="Окно">
     <controls>
-        <button text="Кнопка" />
+        <control type="button" text="Кнопка" />
     </controls>
 </window>
 )"
