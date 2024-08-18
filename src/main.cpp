@@ -2,11 +2,17 @@
 // License: MIT
 
 #include <benchmark/benchmark.h>
+
 #include <pugixml.hpp>
+
 #include <rapidjson/document.h>
 #include <rapidjson/filewritestream.h>
 #include <rapidjson/prettywriter.h>
 #include <rapidjson/stringbuffer.h>
+
+#include <ryml.hpp>
+#include <ryml_std.hpp>
+#include <c4/format.hpp>
 
 
 static void save_file(const rapidjson::Document& doc, const char* filename)
@@ -21,6 +27,7 @@ static void save_file(const rapidjson::Document& doc, const char* filename)
     doc.Accept(writer);
     fclose(fp);
 }
+
 
 static void save_xml()
 {
@@ -40,6 +47,7 @@ static void bm_save_xml(benchmark::State& state)
 }
 BENCHMARK(bm_save_xml);
 
+
 static void save_json()
 {
     const char* json_src =
@@ -57,6 +65,20 @@ static void bm_save_json(benchmark::State& state)
         save_json();
 }
 BENCHMARK(bm_save_json);
+
+
+static void save_yaml()
+{
+    char yml_buf[] = "{foo: 1, bar: [2, 3], john: doe}";
+    ryml::Tree tree = ryml::parse_in_place(yml_buf);
+}
+
+static void bm_save_yaml(benchmark::State& state)
+{
+    for (auto _ : state)
+        save_yaml();
+}
+BENCHMARK(bm_save_yaml);
 
 
 BENCHMARK_MAIN();
