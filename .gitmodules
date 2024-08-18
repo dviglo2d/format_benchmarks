@@ -14,3 +14,7 @@
 	path = third_party/rapidyaml/repo
 	url = https://github.com/biojppm/rapidyaml
 	shallow = true
+[submodule "third_party/yaml-cpp/repo"]
+	path = third_party/yaml-cpp/repo
+	url = https://github.com/jbeder/yaml-cpp
+	shallow = true

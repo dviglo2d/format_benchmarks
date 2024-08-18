@@ -14,6 +14,10 @@
 #include <ryml_std.hpp>
 #include <c4/format.hpp>
 
+#include <yaml-cpp/yaml.h>
+
+#include <fstream>
+
 
 static void save_file(const rapidjson::Document& doc, const char* filename)
 {
@@ -38,7 +42,7 @@ static void save_file(const ryml::Tree& tree, const char* filename)
 }
 
 
-static void save_xml()
+static void save_pugixml()
 {
     const char* xml_src =
         #include "xml_1.inl"
@@ -46,18 +50,18 @@ static void save_xml()
 
     pugi::xml_document doc;
     doc.load(xml_src);
-    doc.save_file("out.xml");
+    doc.save_file("pugixml.xml");
 }
 
-static void bm_save_xml(benchmark::State& state)
+static void bm_save_pugixml(benchmark::State& state)
 {
     for (auto _ : state)
-        save_xml();
+        save_pugixml();
 }
-BENCHMARK(bm_save_xml);
+BENCHMARK(bm_save_pugixml);
 
 
-static void save_json()
+static void save_rapidjson()
 {
     const char* json_src =
         #include "json_1.inl"
@@ -65,33 +69,52 @@ static void save_json()
 
     rapidjson::Document doc;
     doc.Parse(json_src);
-    save_file(doc, "out.json");
+    save_file(doc, "rapidjson.json");
 }
 
-static void bm_save_json(benchmark::State& state)
+static void bm_save_rapidjson(benchmark::State& state)
 {
     for (auto _ : state)
-        save_json();
+        save_rapidjson();
 }
-BENCHMARK(bm_save_json);
+BENCHMARK(bm_save_rapidjson);
 
 
-static void save_yml()
+static void save_rapidyaml()
 {
     static const ryml::csubstr yml_src =
         #include "yml_1.inl"
         ;
 
     ryml::Tree tree = ryml::parse_in_arena(yml_src);
-    save_file(tree, "out.yml");
+    save_file(tree, "rapidyaml.yml");
 }
 
-static void bm_save_yml(benchmark::State& state)
+static void bm_save_rapidyaml(benchmark::State& state)
 {
     for (auto _ : state)
-        save_yml();
+        save_rapidyaml();
 }
-BENCHMARK(bm_save_yml);
+BENCHMARK(bm_save_rapidyaml);
+
+
+static void save_yaml_cpp()
+{
+    const char* yml_src =
+#include "yml_1.inl"
+        ;
+
+    YAML::Node doc = YAML::Load(yml_src);
+    std::ofstream fout("yml-cpp.yml");
+    fout << doc;
+}
+
+static void bm_save_yaml_cpp(benchmark::State& state)
+{
+    for (auto _ : state)
+        save_yaml_cpp();
+}
+BENCHMARK(bm_save_yaml_cpp);
 
 
 BENCHMARK_MAIN();
