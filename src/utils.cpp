@@ -3,6 +3,8 @@
 
 #include "utils.hpp"
 
+#include "dviglo/fs/file_base.hpp"
+
 #include <pugixml.hpp>
 
 #include <rapidjson/filewritestream.h>
@@ -42,18 +44,18 @@ void save_file(const rapidjson::Document& doc, const char* filename)
 
     static char buffer[65536];
 
-    FILE* fp = fopen(filename, "wb");
+    FILE* fp = dviglo::file_open(filename, "wb");
     rj::FileWriteStream stream(fp, buffer, sizeof(buffer));
     rj::PrettyWriter<rapidjson::FileWriteStream> writer(stream);
     doc.Accept(writer);
-    fclose(fp);
+    dviglo::file_close(fp);
 }
 
 void save_file(const ryml::Tree& tree, const char* filename)
 {
     namespace rj = rapidjson;
 
-    FILE* fp = fopen(filename, "wb");
+    FILE* fp = dviglo::file_open(filename, "wb");
     ryml::emit_yaml(tree, tree.root_id(), fp);
-    fclose(fp);
+    dviglo::file_close(fp);
 }
