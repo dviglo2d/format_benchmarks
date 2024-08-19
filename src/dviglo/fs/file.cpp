@@ -4,7 +4,7 @@
 #include "file.hpp"
 
 #include "file_base.hpp"
-#include "log.hpp"
+//#include "log.hpp"
 
 #include <format>
 
@@ -23,7 +23,7 @@ StrUtf8 read_all_text(const StrUtf8& path)
     
     if (!fp)
     {
-        DV_LOG->write_error(format("read_all_text(): !fp | path = \"{}\"", path));
+        //DV_LOG->write_error(format("read_all_text(): !fp | path = \"{}\"", path));
         return ret;
     }
 
