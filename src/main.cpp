@@ -26,13 +26,16 @@
 // --------------------------------------------------------------------------
 
 static const std::string base_path = dviglo::get_base_path();
+
 static const std::string small_xml_src = dviglo::read_all_text(base_path + "data/small.xml");
 static const std::string small_json_src = dviglo::read_all_text(base_path + "data/small.json");
 static const std::string small_yml_src = dviglo::read_all_text(base_path + "data/small.yml");
-static const std::string medium_xml_src = dviglo::read_all_text(base_path + "data/urho3d.xml");
-static const std::string big_xml_src = dviglo::read_all_text(base_path + "data/fnt.xml");
 
-//std::string fnt_json = fnt_xml_to_json();
+static const std::string medium_xml_src = dviglo::read_all_text(base_path + "data/urho3d.xml");
+static const std::string medium_json_src = urho3d_xml_to_json(medium_xml_src);
+
+static const std::string big_xml_src = dviglo::read_all_text(base_path + "data/fnt.xml");
+static const std::string big_json_src = fnt_xml_to_json(big_xml_src);
 
 // --------------------------------------------------------------------------
 
@@ -42,7 +45,7 @@ static void save_pugixml_small()
 
     pugi::xml_document doc;
     doc.load(small_xml_src.c_str());
-    doc.save_file(file_path.c_str());
+    doc.save_file(file_path.c_str(), "    ");
 }
 
 static void bm_save_pugixml_small(benchmark::State& state)
@@ -60,7 +63,7 @@ static void save_pugixml_medium()
 
     pugi::xml_document doc;
     doc.load(medium_xml_src.c_str());
-    doc.save_file(file_path.c_str());
+    doc.save_file(file_path.c_str(), "    ");
 }
 
 static void bm_save_pugixml_medium(benchmark::State& state)
@@ -79,7 +82,7 @@ static void save_pugixml_big()
 
     pugi::xml_document doc;
     doc.load(big_xml_src.c_str());
-    doc.save_file(file_path.c_str());
+    doc.save_file(file_path.c_str(), "    ");
 }
 
 static void bm_save_pugixml_big(benchmark::State& state)
@@ -106,6 +109,42 @@ static void bm_save_rapidjson_small(benchmark::State& state)
         save_rapidjson_small();
 }
 BENCHMARK(bm_save_rapidjson_small);
+
+// --------------------------------------------------------------------------
+
+static void save_rapidjson_medium()
+{
+    static const std::string file_path = base_path + "rapidjson_medium.json";
+
+    rapidjson::Document doc;
+    doc.Parse(medium_json_src.c_str());
+    save_file(doc, file_path.c_str());
+}
+
+static void bm_save_rapidjson_medium(benchmark::State& state)
+{
+    for (auto _ : state)
+        save_rapidjson_medium();
+}
+BENCHMARK(bm_save_rapidjson_medium);
+
+// --------------------------------------------------------------------------
+
+static void save_rapidjson_big()
+{
+    static const std::string file_path = base_path + "rapidjson_big.json";
+
+    rapidjson::Document doc;
+    doc.Parse(big_json_src.c_str());
+    save_file(doc, file_path.c_str());
+}
+
+static void bm_save_rapidjson_big(benchmark::State& state)
+{
+    for (auto _ : state)
+        save_rapidjson_big();
+}
+BENCHMARK(bm_save_rapidjson_big);
 
 // --------------------------------------------------------------------------
 

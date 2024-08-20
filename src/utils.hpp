@@ -8,9 +8,8 @@
 
 #include <string>
 
-
-// Создаёт тестовый json из fnt_xml.inl
-std::string fnt_xml_to_json();
+std::string urho3d_xml_to_json(const std::string& xml_src);
+std::string fnt_xml_to_json(const std::string& xml_src);
 
 void save_file(const rapidjson::Document& doc, const char* filename);
 void save_file(const ryml::Tree& tree, const char* filename);
