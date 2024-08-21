@@ -33,6 +33,7 @@ static const std::string small_yml_src = dviglo::read_all_text(base_path + "data
 
 static const std::string medium_xml_src = dviglo::read_all_text(base_path + "data/urho3d.xml");
 static const std::string medium_json_src = urho3d_xml_to_json(medium_xml_src);
+static const std::string medium_yml_src = urho3d_xml_to_yml(medium_xml_src);
 
 static const std::string big_xml_src = dviglo::read_all_text(base_path + "data/fnt.xml");
 static const std::string big_json_src = fnt_xml_to_json(big_xml_src);
@@ -181,6 +182,24 @@ static void bm_save_yaml_cpp_small(benchmark::State& state)
         save_yaml_cpp_small();
 }
 BENCHMARK(bm_save_yaml_cpp_small);
+
+// --------------------------------------------------------------------------
+
+static void save_yaml_cpp_medium()
+{
+    static const std::string file_path = base_path + "yml-cpp_medium.yml";
+
+    YAML::Node doc = YAML::Load(medium_yml_src);
+    std::ofstream fout(file_path);
+    fout << doc;
+}
+
+static void bm_save_yaml_cpp_medium(benchmark::State& state)
+{
+    for (auto _ : state)
+        save_yaml_cpp_medium();
+}
+BENCHMARK(bm_save_yaml_cpp_medium);
 
 // --------------------------------------------------------------------------
 

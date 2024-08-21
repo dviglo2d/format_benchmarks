@@ -1,0 +1,885 @@
+type: Window
+attributes:
+  Name: ParticleEffectWindow
+  Is Movable: true
+  Is Resizable: true
+  Resize Border: 6 6 6 6
+  Layout Mode: Vertical
+  Layout Spacing: 4
+  Layout Border: 6 6 6 6
+elements:
+  - attributes:
+      Min Size: 0 16
+      Max Size: 2147483647 16
+      Layout Mode: Horizontal
+    elements:
+      - type: Text
+        attributes:
+          Text: Particle editor
+          Auto Localizable: true
+      - type: Button
+        style: CloseButton
+        attributes:
+          Name: CloseButton
+  - type: BorderImage
+    style: EditorDivider
+  - attributes:
+      Layout Mode: Horizontal
+    elements:
+      - attributes:
+          Layout Mode: Vertical
+        elements:
+          - type: View3D
+            attributes:
+              Name: ParticleEffectPreview
+              Use Derived Opacity: false
+          - type: BorderImage
+            style: EditorDivider
+          - attributes:
+              Layout Mode: Horizontal
+              Min Size: 0 16
+              Max Size: 2147483647 16
+              Layout Spacing: 4
+            elements:
+              - type: Button
+                attributes:
+                  Name: ResetViewport
+                  Layout Mode: Horizontal
+                  Layout Border: 1 1 1 1
+                elements:
+                  - type: Text
+                    attributes:
+                      Text: Reset Viewport
+                      Auto Localizable: true
+                      Text Alignment: Center
+              - type: BorderImage
+                style: EditorVerticalDivider
+              - attributes:
+                  Min Size: 0 16
+                  Max Size: 2147483647 16
+                  Layout Mode: Horizontal
+                  Layout Spacing: 10
+                elements:
+                  - type: Text
+                    style: EditorAttributeText
+                    attributes:
+                      Text: Show Grid
+                      Auto Localizable: true
+                  - attributes:
+                      Min Size: 0 16
+                      Max Size: 2147483647 16
+                      Layout Mode: Horizontal
+                      Layout Spacing: 1
+                    elements:
+                      - type: CheckBox
+                        attributes:
+                          Name: ShowGrid
+      - type: BorderImage
+        style: EditorVerticalDivider
+      - attributes:
+          Layout Mode: Vertical
+        elements:
+          - attributes:
+              Min Size: 0 16
+              Max Size: 2147483647 16
+              Layout Mode: Horizontal
+              Name: NameContainer
+          - type: BorderImage
+            style: EditorDivider
+          - type: ListView
+            style: PanelView
+            attributes:
+              Min Size: 0 60
+            elements:
+              - type: BorderImage
+                internal: true
+                elements:
+                  - internal: true
+                    elements:
+                      - style: Panel
+                        elements:
+                          - type: Text
+                            attributes:
+                              Text: Initial
+                              Auto Localizable: true
+                      - attributes:
+                          Min Size: 0 16
+                          Max Size: 2147483647 16
+                          Layout Mode: Horizontal
+                          Layout Spacing: 10
+                        elements:
+                          - type: Text
+                            style: EditorAttributeText
+                            attributes:
+                              Text: Constant Force
+                          - attributes:
+                              Min Size: 0 16
+                              Max Size: 2147483647 16
+                              Layout Mode: Horizontal
+                              Layout Spacing: 1
+                            elements:
+                              - type: LineEdit
+                                attributes:
+                                  Name: ConstantForceX
+                              - type: LineEdit
+                                attributes:
+                                  Name: ConstantForceY
+                              - type: LineEdit
+                                attributes:
+                                  Name: ConstantForceZ
+                      - attributes:
+                          Min Size: 0 16
+                          Max Size: 2147483647 16
+                          Layout Mode: Horizontal
+                          Layout Spacing: 10
+                        elements:
+                          - type: Text
+                            style: EditorAttributeText
+                            attributes:
+                              Text: Direction (min)
+                          - attributes:
+                              Min Size: 0 16
+                              Max Size: 2147483647 16
+                              Layout Mode: Horizontal
+                              Layout Spacing: 1
+                            elements:
+                              - type: LineEdit
+                                attributes:
+                                  Name: DirectionMinX
+                              - type: LineEdit
+                                attributes:
+                                  Name: DirectionMinY
+                              - type: LineEdit
+                                attributes:
+                                  Name: DirectionMinZ
+                      - attributes:
+                          Min Size: 0 16
+                          Max Size: 2147483647 16
+                          Layout Mode: Horizontal
+                          Layout Spacing: 10
+                        elements:
+                          - type: Text
+                            style: EditorAttributeText
+                            attributes:
+                              Text: Direction (max)
+                          - attributes:
+                              Min Size: 0 16
+                              Max Size: 2147483647 16
+                              Layout Mode: Horizontal
+                              Layout Spacing: 1
+                            elements:
+                              - type: LineEdit
+                                attributes:
+                                  Name: DirectionMaxX
+                              - type: LineEdit
+                                attributes:
+                                  Name: DirectionMaxY
+                              - type: LineEdit
+                                attributes:
+                                  Name: DirectionMaxZ
+                      - attributes:
+                          Min Size: 0 16
+                          Max Size: 2147483647 16
+                          Layout Mode: Horizontal
+                          Layout Spacing: 10
+                        elements:
+                          - type: Text
+                            style: EditorAttributeText
+                            attributes:
+                              Text: Damping Force
+                          - attributes:
+                              Min Size: 0 16
+                              Max Size: 2147483647 16
+                              Layout Mode: Horizontal
+                              Layout Spacing: 1
+                            elements:
+                              - type: LineEdit
+                                attributes:
+                                  Name: DampingForce
+                      - attributes:
+                          Min Size: 0 16
+                          Max Size: 2147483647 16
+                          Layout Mode: Horizontal
+                          Layout Spacing: 10
+                        elements:
+                          - type: Text
+                            style: EditorAttributeText
+                            attributes:
+                              Text: Active Time
+                          - attributes:
+                              Min Size: 0 16
+                              Max Size: 2147483647 16
+                              Layout Mode: Horizontal
+                              Layout Spacing: 1
+                            elements:
+                              - type: LineEdit
+                                attributes:
+                                  Name: ActiveTime
+                      - attributes:
+                          Min Size: 0 16
+                          Max Size: 2147483647 16
+                          Layout Mode: Horizontal
+                          Layout Spacing: 10
+                        elements:
+                          - type: Text
+                            style: EditorAttributeText
+                            attributes:
+                              Text: Inactive Time
+                          - attributes:
+                              Min Size: 0 16
+                              Max Size: 2147483647 16
+                              Layout Mode: Horizontal
+                              Layout Spacing: 1
+                            elements:
+                              - type: LineEdit
+                                attributes:
+                                  Name: InactiveTime
+                      - attributes:
+                          Min Size: 0 16
+                          Max Size: 2147483647 16
+                          Layout Mode: Horizontal
+                          Layout Spacing: 10
+                        elements:
+                          - type: Text
+                            style: EditorAttributeText
+                            attributes:
+                              Text: Particle Size (min)
+                          - attributes:
+                              Min Size: 0 16
+                              Max Size: 2147483647 16
+                              Layout Mode: Horizontal
+                              Layout Spacing: 1
+                            elements:
+                              - type: LineEdit
+                                attributes:
+                                  Name: ParticleSizeMinX
+                              - type: LineEdit
+                                attributes:
+                                  Name: ParticleSizeMinY
+                      - attributes:
+                          Min Size: 0 16
+                          Max Size: 2147483647 16
+                          Layout Mode: Horizontal
+                          Layout Spacing: 10
+                        elements:
+                          - type: Text
+                            style: EditorAttributeText
+                            attributes:
+                              Text: Particle Size (max)
+                          - attributes:
+                              Min Size: 0 16
+                              Max Size: 2147483647 16
+                              Layout Mode: Horizontal
+                              Layout Spacing: 1
+                            elements:
+                              - type: LineEdit
+                                attributes:
+                                  Name: ParticleSizeMaxX
+                              - type: LineEdit
+                                attributes:
+                                  Name: ParticleSizeMaxY
+                      - attributes:
+                          Min Size: 0 16
+                          Max Size: 2147483647 16
+                          Layout Mode: Horizontal
+                          Layout Spacing: 10
+                        elements:
+                          - type: Text
+                            style: EditorAttributeText
+                            attributes:
+                              Text: Time To Live
+                          - attributes:
+                              Min Size: 0 16
+                              Max Size: 2147483647 16
+                              Layout Mode: Horizontal
+                              Layout Spacing: 1
+                            elements:
+                              - type: LineEdit
+                                attributes:
+                                  Name: TimeToLiveMin
+                              - type: LineEdit
+                                attributes:
+                                  Name: TimeToLiveMax
+                      - attributes:
+                          Min Size: 0 16
+                          Max Size: 2147483647 16
+                          Layout Mode: Horizontal
+                          Layout Spacing: 10
+                        elements:
+                          - type: Text
+                            style: EditorAttributeText
+                            attributes:
+                              Text: Velocity
+                          - attributes:
+                              Min Size: 0 16
+                              Max Size: 2147483647 16
+                              Layout Mode: Horizontal
+                              Layout Spacing: 1
+                            elements:
+                              - type: LineEdit
+                                attributes:
+                                  Name: VelocityMin
+                              - type: LineEdit
+                                attributes:
+                                  Name: VelocityMax
+                      - attributes:
+                          Min Size: 0 16
+                          Max Size: 2147483647 16
+                          Layout Mode: Horizontal
+                          Layout Spacing: 10
+                        elements:
+                          - type: Text
+                            style: EditorAttributeText
+                            attributes:
+                              Text: Rotation
+                          - attributes:
+                              Min Size: 0 16
+                              Max Size: 2147483647 16
+                              Layout Mode: Horizontal
+                              Layout Spacing: 1
+                            elements:
+                              - type: LineEdit
+                                attributes:
+                                  Name: RotationMin
+                              - type: LineEdit
+                                attributes:
+                                  Name: RotationMax
+                      - attributes:
+                          Min Size: 0 16
+                          Max Size: 2147483647 16
+                          Layout Mode: Horizontal
+                          Layout Spacing: 10
+                        elements:
+                          - type: Text
+                            style: EditorAttributeText
+                            attributes:
+                              Text: Rotation Speed
+                          - attributes:
+                              Min Size: 0 16
+                              Max Size: 2147483647 16
+                              Layout Mode: Horizontal
+                              Layout Spacing: 1
+                            elements:
+                              - type: LineEdit
+                                attributes:
+                                  Name: RotationSpeedMin
+                              - type: LineEdit
+                                attributes:
+                                  Name: RotationSpeedMax
+                      - type: BorderImage
+                        style: EditorDivider
+                      - style: Panel
+                        elements:
+                          - type: Text
+                            attributes:
+                              Text: Variation
+                              Auto Localizable: true
+                      - attributes:
+                          Min Size: 0 16
+                          Max Size: 2147483647 16
+                          Layout Mode: Horizontal
+                          Layout Spacing: 10
+                        elements:
+                          - type: Text
+                            style: EditorAttributeText
+                            attributes:
+                              Text: Size (add)
+                          - attributes:
+                              Min Size: 0 16
+                              Max Size: 2147483647 16
+                              Layout Mode: Horizontal
+                              Layout Spacing: 1
+                            elements:
+                              - type: LineEdit
+                                attributes:
+                                  Name: SizeAdd
+                      - attributes:
+                          Min Size: 0 16
+                          Max Size: 2147483647 16
+                          Layout Mode: Horizontal
+                          Layout Spacing: 10
+                        elements:
+                          - type: Text
+                            style: EditorAttributeText
+                            attributes:
+                              Text: Size (multiply)
+                          - attributes:
+                              Min Size: 0 16
+                              Max Size: 2147483647 16
+                              Layout Mode: Horizontal
+                              Layout Spacing: 1
+                            elements:
+                              - type: LineEdit
+                                attributes:
+                                  Name: SizeMultiply
+                      - attributes:
+                          Min Size: 0 16
+                          Max Size: 2147483647 16
+                          Layout Mode: Horizontal
+                          Layout Spacing: 10
+                        elements:
+                          - type: Text
+                            style: EditorAttributeText
+                            attributes:
+                              Text: Animation LOD bias
+                          - attributes:
+                              Min Size: 0 16
+                              Max Size: 2147483647 16
+                              Layout Mode: Horizontal
+                              Layout Spacing: 1
+                            elements:
+                              - type: LineEdit
+                                attributes:
+                                  Name: AnimationLodBias
+                      - type: BorderImage
+                        style: EditorDivider
+                      - attributes:
+                          Min Size: 0 16
+                          Max Size: 2147483647 16
+                          Layout Mode: Horizontal
+                          Layout Spacing: 10
+                        elements:
+                          - type: Text
+                            style: EditorAttributeText
+                            attributes:
+                              Text: Color Frames
+                              Auto Localizable: true
+                      - type: ListView
+                        style: PanelView
+                        attributes:
+                          Name: ColorFrameListView
+                          Highlight Mode: Always
+                          Min Size: 0 100
+                      - attributes:
+                          Name: ColorFrameButtonContainer
+                          Min Size: 0 16
+                          Max Size: 2147483647 16
+                          Layout Mode: Horizontal
+                          Layout Spacing: 4
+                        elements:
+                          - type: Button
+                            attributes:
+                              Name: NewColorFrame
+                              Layout Mode: Horizontal
+                              Layout Border: 1 1 1 1
+                            elements:
+                              - type: Text
+                                attributes:
+                                  Text: New
+                                  Text Alignment: Center
+                                  Auto Localizable: true
+                          - type: Button
+                            attributes:
+                              Name: RemoveColorFrame
+                              Layout Mode: Horizontal
+                              Layout Border: 1 1 1 1
+                            elements:
+                              - type: Text
+                                attributes:
+                                  Text: Remove
+                                  Text Alignment: Center
+                                  Auto Localizable: true
+                          - type: Button
+                            attributes:
+                              Name: ColorFrameSort
+                              Layout Mode: Horizontal
+                              Layout Border: 1 1 1 1
+                            elements:
+                              - type: Text
+                                attributes:
+                                  Text: Sort
+                                  Text Alignment: Center
+                                  Auto Localizable: true
+                      - type: BorderImage
+                        style: EditorDivider
+                      - attributes:
+                          Min Size: 0 16
+                          Max Size: 2147483647 16
+                          Layout Mode: Horizontal
+                          Layout Spacing: 10
+                        elements:
+                          - type: Text
+                            style: EditorAttributeText
+                            attributes:
+                              Text: Texture Frames
+                              Auto Localizable: true
+                      - type: ListView
+                        style: PanelView
+                        attributes:
+                          Name: TextureFrameListView
+                          Min Size: 0 100
+                      - attributes:
+                          Name: TextureFrameButtonContainer
+                          Min Size: 0 16
+                          Max Size: 2147483647 16
+                          Layout Mode: Horizontal
+                          Layout Spacing: 4
+                        elements:
+                          - type: Button
+                            attributes:
+                              Name: NewTextureFrame
+                              Layout Mode: Horizontal
+                              Layout Border: 1 1 1 1
+                            elements:
+                              - type: Text
+                                attributes:
+                                  Text: New
+                                  Text Alignment: Center
+                                  Auto Localizable: true
+                          - type: Button
+                            attributes:
+                              Name: RemoveTextureFrame
+                              Layout Mode: Horizontal
+                              Layout Border: 1 1 1 1
+                            elements:
+                              - type: Text
+                                attributes:
+                                  Text: Remove
+                                  Text Alignment: Center
+                                  Auto Localizable: true
+                          - type: Button
+                            attributes:
+                              Name: TextureFrameSort
+                              Layout Mode: Horizontal
+                              Layout Border: 1 1 1 1
+                            elements:
+                              - type: Text
+                                attributes:
+                                  Text: Sort
+                                  Text Alignment: Center
+                                  Auto Localizable: true
+                      - type: BorderImage
+                        style: EditorDivider
+                      - style: Panel
+                        elements:
+                          - type: Text
+                            attributes:
+                              Text: Emitter
+                              Auto Localizable: true
+                      - attributes:
+                          Min Size: 0 16
+                          Max Size: 2147483647 16
+                          Layout Mode: Horizontal
+                          Layout Spacing: 10
+                        elements:
+                          - type: Text
+                            style: EditorAttributeText
+                            attributes:
+                              Text: Number of Particles
+                          - attributes:
+                              Min Size: 0 16
+                              Max Size: 2147483647 16
+                              Layout Mode: Horizontal
+                              Layout Spacing: 1
+                            elements:
+                              - type: LineEdit
+                                attributes:
+                                  Name: NumParticles
+                      - attributes:
+                          Min Size: 0 16
+                          Max Size: 2147483647 16
+                          Layout Mode: Horizontal
+                          Layout Spacing: 10
+                        elements:
+                          - type: Text
+                            style: EditorAttributeText
+                            attributes:
+                              Text: Emitter Size
+                          - attributes:
+                              Min Size: 0 16
+                              Max Size: 2147483647 16
+                              Layout Mode: Horizontal
+                              Layout Spacing: 1
+                            elements:
+                              - type: LineEdit
+                                attributes:
+                                  Name: EmitterSizeX
+                              - type: LineEdit
+                                attributes:
+                                  Name: EmitterSizeY
+                              - type: LineEdit
+                                attributes:
+                                  Name: EmitterSizeZ
+                      - attributes:
+                          Min Size: 0 16
+                          Max Size: 2147483647 16
+                          Layout Mode: Horizontal
+                          Layout Spacing: 10
+                        elements:
+                          - type: Text
+                            style: EditorAttributeText
+                            attributes:
+                              Text: Emission Rate
+                          - attributes:
+                              Min Size: 0 16
+                              Max Size: 2147483647 16
+                              Layout Mode: Horizontal
+                              Layout Spacing: 1
+                            elements:
+                              - type: LineEdit
+                                attributes:
+                                  Name: EmissionRateMin
+                              - type: LineEdit
+                                attributes:
+                                  Name: EmissionRateMax
+                      - attributes:
+                          Min Size: 0 16
+                          Max Size: 2147483647 16
+                          Layout Mode: Horizontal
+                          Layout Spacing: 10
+                        elements:
+                          - type: Text
+                            style: EditorAttributeText
+                            attributes:
+                              Text: Emitter Shape
+                          - type: DropDownList
+                            attributes:
+                              Name: EmitterShape
+                              Resize Popup: true
+                            elements:
+                              - type: Window
+                                internal: true
+                                popup: true
+                                style: none
+                                elements:
+                                  - type: ListView
+                                    internal: true
+                                    style: none
+                                    elements:
+                                      - type: BorderImage
+                                        internal: true
+                                        style: none
+                                        elements:
+                                          - internal: true
+                                            style: none
+                                            elements:
+                                              - type: Text
+                                                style: FileSelectorFilterText
+                                                attributes:
+                                                  Text: Sphere
+                                              - type: Text
+                                                style: FileSelectorFilterText
+                                                attributes:
+                                                  Text: Box
+                                              - type: Text
+                                                style: FileSelectorFilterText
+                                                attributes:
+                                                  Text: Sphere Volume
+                                              - type: Text
+                                                style: FileSelectorFilterText
+                                                attributes:
+                                                  Text: Cylinder
+                                              - type: Text
+                                                style: FileSelectorFilterText
+                                                attributes:
+                                                  Text: Ring
+                      - type: BorderImage
+                        style: EditorDivider
+                      - style: Panel
+                        elements:
+                          - type: Text
+                            attributes:
+                              Text: Renderer
+                              Auto Localizable: true
+                      - style: Panel
+                        elements:
+                          - attributes:
+                              Min Size: 0 16
+                              Max Size: 2147483647 16
+                              Layout Mode: Horizontal
+                              Layout Spacing: 10
+                            elements:
+                              - type: Text
+                                style: EditorAttributeText
+                                attributes:
+                                  Text: Material
+                              - attributes:
+                                  Name: ParticleMaterialContainer
+                                  Min Size: 0 16
+                                  Max Size: 2147483647 16
+                                  Layout Mode: Horizontal
+                                  Layout Spacing: 1
+                          - attributes:
+                              Min Size: 0 16
+                              Max Size: 2147483647 16
+                              Layout Mode: Horizontal
+                              Layout Spacing: 10
+                            elements:
+                              - type: Text
+                                style: EditorAttributeText
+                                attributes:
+                                  Text: Relative Transform
+                              - attributes:
+                                  Min Size: 0 16
+                                  Max Size: 2147483647 16
+                                  Layout Mode: Horizontal
+                                  Layout Spacing: 1
+                                elements:
+                                  - type: CheckBox
+                                    attributes:
+                                      Name: Relative
+                          - attributes:
+                              Min Size: 0 16
+                              Max Size: 2147483647 16
+                              Layout Mode: Horizontal
+                              Layout Spacing: 10
+                            elements:
+                              - type: Text
+                                style: EditorAttributeText
+                                attributes:
+                                  Text: Scaled
+                              - attributes:
+                                  Min Size: 0 16
+                                  Max Size: 2147483647 16
+                                  Layout Mode: Horizontal
+                                  Layout Spacing: 1
+                                elements:
+                                  - type: CheckBox
+                                    attributes:
+                                      Name: Scaled
+                          - attributes:
+                              Min Size: 0 16
+                              Max Size: 2147483647 16
+                              Layout Mode: Horizontal
+                              Layout Spacing: 10
+                            elements:
+                              - type: Text
+                                style: EditorAttributeText
+                                attributes:
+                                  Text: Sorted
+                              - attributes:
+                                  Min Size: 0 16
+                                  Max Size: 2147483647 16
+                                  Layout Mode: Horizontal
+                                  Layout Spacing: 1
+                                elements:
+                                  - type: CheckBox
+                                    attributes:
+                                      Name: Sorted
+                          - attributes:
+                              Min Size: 0 16
+                              Max Size: 2147483647 16
+                              Layout Mode: Horizontal
+                              Layout Spacing: 10
+                            elements:
+                              - type: Text
+                                style: EditorAttributeText
+                                attributes:
+                                  Text: Fixed Screen Size
+                              - attributes:
+                                  Min Size: 0 16
+                                  Max Size: 2147483647 16
+                                  Layout Mode: Horizontal
+                                  Layout Spacing: 1
+                                elements:
+                                  - type: CheckBox
+                                    attributes:
+                                      Name: FixedScreenSize
+                          - attributes:
+                              Min Size: 0 16
+                              Max Size: 2147483647 16
+                              Layout Mode: Horizontal
+                              Layout Spacing: 10
+                            elements:
+                              - type: Text
+                                style: EditorAttributeText
+                                attributes:
+                                  Text: Face Camera Mode
+                              - type: DropDownList
+                                attributes:
+                                  Name: FaceCameraMode
+                                  Resize Popup: true
+                                elements:
+                                  - type: Window
+                                    internal: true
+                                    popup: true
+                                    style: none
+                                    elements:
+                                      - type: ListView
+                                        internal: true
+                                        style: none
+                                        elements:
+                                          - type: BorderImage
+                                            internal: true
+                                            style: none
+                                            elements:
+                                              - internal: true
+                                                style: none
+                                                elements:
+                                                  - type: Text
+                                                    style: FileSelectorFilterText
+                                                    attributes:
+                                                      Text: None
+                                                  - type: Text
+                                                    style: FileSelectorFilterText
+                                                    attributes:
+                                                      Text: Rotate XYZ
+                                                  - type: Text
+                                                    style: FileSelectorFilterText
+                                                    attributes:
+                                                      Text: Rotate Y
+                                                  - type: Text
+                                                    style: FileSelectorFilterText
+                                                    attributes:
+                                                      Text: LookAt XYZ
+                                                  - type: Text
+                                                    style: FileSelectorFilterText
+                                                    attributes:
+                                                      Text: LookAt Y
+                                                  - type: Text
+                                                    style: FileSelectorFilterText
+                                                    attributes:
+                                                      Text: Direction
+          - type: BorderImage
+            style: EditorDivider
+          - attributes:
+              Name: ButtonContainer
+              Min Size: 0 16
+              Max Size: 2147483647 16
+              Layout Mode: Horizontal
+              Layout Spacing: 4
+            elements:
+              - type: Button
+                attributes:
+                  Name: NewButton
+                  Layout Mode: Horizontal
+                  Layout Border: 1 1 1 1
+                elements:
+                  - type: Text
+                    attributes:
+                      Text: New
+                      Text Alignment: Center
+                      Auto Localizable: true
+              - type: Button
+                attributes:
+                  Name: RevertButton
+                  Layout Mode: Horizontal
+                  Layout Border: 1 1 1 1
+                elements:
+                  - type: Text
+                    attributes:
+                      Text: Revert
+                      Text Alignment: Center
+                      Auto Localizable: true
+              - type: Button
+                attributes:
+                  Name: SaveButton
+                  Layout Mode: Horizontal
+                  Layout Border: 1 1 1 1
+                elements:
+                  - type: Text
+                    attributes:
+                      Text: Save
+                      Text Alignment: Center
+                      Auto Localizable: true
+              - type: Button
+                attributes:
+                  Name: SaveAsButton
+                  Layout Mode: Horizontal
+                  Layout Border: 1 1 1 1
+                elements:
+                  - type: Text
+                    attributes:
+                      Text: Save as
+                      Text Alignment: Center
+                      Auto Localizable: true

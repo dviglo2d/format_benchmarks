@@ -15,6 +15,8 @@
 #include <ryml_std.hpp>
 #include <c4/format.hpp>
 
+#include <yaml-cpp/yaml.h>
+
 #include <iostream>
 
 namespace rj = rapidjson;
@@ -57,6 +59,24 @@ static void convert_element_node(const pugi::xml_node src_node, rj::Value& out_m
 
     if (out_elements.Size())
         out_member.AddMember("elements", out_elements, allocator);
+}
+
+std::string urho3d_xml_to_json(const std::string& xml_src)
+{
+    pugi::xml_document src_doc;
+    src_doc.load(xml_src.c_str());
+    const std::string node_name = src_doc.document_element().name();
+    assert(node_name == "element");
+
+    rj::Document out_doc;
+    out_doc.SetObject();
+    convert_element_node(src_doc.document_element(), out_doc, out_doc.GetAllocator());
+
+    rj::StringBuffer buffer;
+    rj::PrettyWriter<rj::StringBuffer> writer(buffer);
+    out_doc.Accept(writer);
+
+    return std::string(buffer.GetString());
 }
 
 // Нода <font> из fnt.xml
@@ -160,24 +180,6 @@ static void convert_font_node(const pugi::xml_node src_node, rj::Document& out_d
     out_doc.AddMember("pages", out_pages, out_doc.GetAllocator());
 }
 
-std::string urho3d_xml_to_json(const std::string& xml_src)
-{
-    pugi::xml_document src_doc;
-    src_doc.load(xml_src.c_str());
-    const std::string node_name = src_doc.document_element().name();
-    assert(node_name == "element");
-
-    rj::Document out_doc;
-    out_doc.SetObject();
-    convert_element_node(src_doc.document_element(), out_doc, out_doc.GetAllocator());
-
-    rj::StringBuffer buffer;
-    rj::PrettyWriter<rj::StringBuffer> writer(buffer);
-    out_doc.Accept(writer);
-
-    return std::string(buffer.GetString());
-}
-
 std::string fnt_xml_to_json(const std::string& xml_src)
 {
     pugi::xml_document src_doc;
@@ -194,6 +196,36 @@ std::string fnt_xml_to_json(const std::string& xml_src)
     out_doc.Accept(writer);
 
     return std::string(buffer.GetString());
+}
+
+// Нода <element> из urho3d.xml
+static void convert_element_node(const pugi::xml_node src_node, YAML::Node& out_node)
+{
+    for (const pugi::xml_attribute src_attribute : src_node.attributes())
+        out_node[src_attribute.name()] = src_attribute.value();
+
+    for (const pugi::xml_node child_node : src_node.children("attribute"))
+        out_node["attributes"][child_node.attribute("name").value()] = child_node.attribute("value").value();
+
+    for (const pugi::xml_node child_node : src_node.children("element"))
+    {
+        YAML::Node element;
+        convert_element_node(child_node, element);
+        out_node["elements"].push_back(element);
+    }
+}
+
+std::string urho3d_xml_to_yml(const std::string& xml_src)
+{
+    pugi::xml_document src_doc;
+    src_doc.load(xml_src.c_str());
+    const std::string node_name = src_doc.document_element().name();
+    assert(node_name == "element");
+
+    YAML::Node out_doc;
+    convert_element_node(src_doc.document_element(), out_doc);
+
+    return YAML::Dump(out_doc);
 }
 
 void save_file(const rj::Document& doc, const char* filename)
