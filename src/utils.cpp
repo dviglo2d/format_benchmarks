@@ -207,6 +207,9 @@ static void convert_element_node(const pugi::xml_node src_node, YAML::Node& out_
     for (const pugi::xml_node child_node : src_node.children("attribute"))
         out_node["attributes"][child_node.attribute("name").value()] = child_node.attribute("value").value();
 
+    if (out_node["attributes"])
+        out_node["attributes"].SetStyle(YAML::EmitterStyle::Flow);
+
     for (const pugi::xml_node child_node : src_node.children("element"))
     {
         YAML::Node element;
