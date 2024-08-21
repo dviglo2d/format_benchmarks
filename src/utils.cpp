@@ -218,6 +218,59 @@ static void convert_element_node(const pugi::xml_node src_node, YAML::Node& out_
     }
 }
 
+// Нода <font> из fnt.xml
+static void convert_font_node(const pugi::xml_node src_node, YAML::Node& out_node)
+{
+    pugi::xml_node src_info = src_node.child("info");
+
+    for (const pugi::xml_attribute src_attribute : src_info.attributes())
+        out_node["info"][src_attribute.name()] = src_attribute.value();
+
+    pugi::xml_node src_chars = src_node.child("chars");
+
+    for (const pugi::xml_node src_char : src_chars)
+    {
+        YAML::Node out_char;
+
+        for (const pugi::xml_attribute src_attribute : src_char.attributes())
+            out_char[src_attribute.name()] = src_attribute.value();
+
+        out_char.SetStyle(YAML::EmitterStyle::Flow);
+        out_node["chars"].push_back(out_char);
+    }
+
+    pugi::xml_node src_kernings = src_node.child("kernings");
+
+    for (const pugi::xml_node src_kerning : src_kernings)
+    {
+        YAML::Node out_kerning;
+
+        for (const pugi::xml_attribute src_attribute : src_kerning.attributes())
+            out_kerning[src_attribute.name()] = src_attribute.value();
+
+        out_kerning.SetStyle(YAML::EmitterStyle::Flow);
+        out_node["kernings"].push_back(out_kerning);
+    }
+
+    pugi::xml_node src_common = src_node.child("common");
+
+    for (const pugi::xml_attribute src_attribute : src_common.attributes())
+        out_node["common"][src_attribute.name()] = src_attribute.value();
+
+    pugi::xml_node src_pages = src_node.child("pages");
+
+    for (const pugi::xml_node src_page : src_pages)
+    {
+        YAML::Node out_page;
+
+        for (const pugi::xml_attribute src_attribute : src_page.attributes())
+            out_page[src_attribute.name()] = src_attribute.value();
+
+        out_page.SetStyle(YAML::EmitterStyle::Flow);
+        out_node["pages"].push_back(out_page);
+    }
+}
+
 std::string urho3d_xml_to_yml(const std::string& xml_src)
 {
     pugi::xml_document src_doc;
@@ -227,6 +280,19 @@ std::string urho3d_xml_to_yml(const std::string& xml_src)
 
     YAML::Node out_doc;
     convert_element_node(src_doc.document_element(), out_doc);
+
+    return YAML::Dump(out_doc);
+}
+
+std::string fnt_xml_to_yml(const std::string& xml_src)
+{
+    pugi::xml_document src_doc;
+    src_doc.load(xml_src.c_str());
+    const std::string node_name = src_doc.document_element().name();
+    assert(node_name == "font");
+
+    YAML::Node out_doc;
+    convert_font_node(src_doc.document_element(), out_doc);
 
     return YAML::Dump(out_doc);
 }
