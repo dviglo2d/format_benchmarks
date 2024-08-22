@@ -21,6 +21,8 @@
 
 #include <yaml-cpp/yaml.h>
 
+#include <hjson.h>
+
 #include <fstream>
 
 // --------------------------------------------------------------------------
@@ -74,6 +76,23 @@ static void bm_save_rapidjson_small(benchmark::State& state)
         save_rapidjson_small();
 }
 BENCHMARK(bm_save_rapidjson_small);
+
+// --------------------------------------------------------------------------
+
+static void save_hjson_small()
+{
+    static const std::string file_path = base_path + "hjson_small.json";
+
+    Hjson::Value doc = Hjson::Unmarshal(small_json_src.c_str());
+    Hjson::MarshalToFile(doc, file_path.c_str());
+}
+
+static void bm_save_hjson_small(benchmark::State& state)
+{
+    for (auto _ : state)
+        save_hjson_small();
+}
+BENCHMARK(bm_save_hjson_small);
 
 // --------------------------------------------------------------------------
 
@@ -149,6 +168,23 @@ BENCHMARK(bm_save_rapidjson_medium);
 
 // --------------------------------------------------------------------------
 
+static void save_hjson_medium()
+{
+    static const std::string file_path = base_path + "hjson_medium.json";
+
+    Hjson::Value doc = Hjson::Unmarshal(medium_json_src.c_str());
+    Hjson::MarshalToFile(doc, file_path.c_str());
+}
+
+static void bm_save_hjson_medium(benchmark::State& state)
+{
+    for (auto _ : state)
+        save_hjson_medium();
+}
+BENCHMARK(bm_save_hjson_medium);
+
+// --------------------------------------------------------------------------
+
 static void save_rapidyaml_medium()
 {
     static const std::string file_path = base_path + "rapidyaml_medium.yml";
@@ -218,6 +254,23 @@ static void bm_save_rapidjson_big(benchmark::State& state)
         save_rapidjson_big();
 }
 BENCHMARK(bm_save_rapidjson_big);
+
+// --------------------------------------------------------------------------
+
+static void save_hjson_big()
+{
+    static const std::string file_path = base_path + "hjson_big.json";
+
+    Hjson::Value doc = Hjson::Unmarshal(big_json_src.c_str());
+    Hjson::MarshalToFile(doc, file_path.c_str());
+}
+
+static void bm_save_hjson_big(benchmark::State& state)
+{
+    for (auto _ : state)
+        save_hjson_big();
+}
+BENCHMARK(bm_save_hjson_big);
 
 // --------------------------------------------------------------------------
 

@@ -18,3 +18,7 @@
 	path = third_party/yaml-cpp/repo
 	url = https://github.com/jbeder/yaml-cpp
 	shallow = true
+[submodule "third_party/hjson-cpp/repo"]
+	path = third_party/hjson-cpp/repo
+	url = https://github.com/hjson/hjson-cpp
+	shallow = true

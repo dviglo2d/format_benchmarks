@@ -14,6 +14,7 @@ add_subdirectory(third_party/pugixml)
 add_subdirectory(third_party/rapidjson)
 add_subdirectory(third_party/rapidyaml)
 add_subdirectory(third_party/yaml-cpp)
+add_subdirectory(third_party/hjson-cpp)
 
 project(format_benchmarks)
 
@@ -70,7 +71,7 @@ dv_create_dir_link(${CMAKE_SOURCE_DIR}/result/data ${CMAKE_BINARY_DIR}/result/da
 set(target_name format_benchmarks)
 file(GLOB_RECURSE source_files src/*.cpp src/*.hpp)
 add_executable(${target_name} ${source_files})
-target_link_libraries(${target_name} PRIVATE benchmark::benchmark pugixml::pugixml rapidjson ryml yaml-cpp::yaml-cpp)
+target_link_libraries(${target_name} PRIVATE benchmark::benchmark pugixml::pugixml rapidjson ryml yaml-cpp::yaml-cpp hjson)
 
 # Отладочная версия приложения будет иметь суффикс _d
 set_property(TARGET ${target_name} PROPERTY DEBUG_POSTFIX _d)
