@@ -59,43 +59,6 @@ BENCHMARK(bm_save_pugixml_small);
 
 // --------------------------------------------------------------------------
 
-static void save_pugixml_medium()
-{
-    static const std::string file_path = base_path + "pugixml_medium.xml";
-
-    pugi::xml_document doc;
-    doc.load(medium_xml_src.c_str());
-    doc.save_file(file_path.c_str(), "    ");
-}
-
-static void bm_save_pugixml_medium(benchmark::State& state)
-{
-    for (auto _ : state)
-        save_pugixml_medium();
-}
-BENCHMARK(bm_save_pugixml_medium);
-
-// --------------------------------------------------------------------------
-
-
-static void save_pugixml_big()
-{
-    static const std::string file_path = base_path + "pugixml_big.xml";
-
-    pugi::xml_document doc;
-    doc.load(big_xml_src.c_str());
-    doc.save_file(file_path.c_str(), "    ");
-}
-
-static void bm_save_pugixml_big(benchmark::State& state)
-{
-    for (auto _ : state)
-        save_pugixml_big();
-}
-BENCHMARK(bm_save_pugixml_big);
-
-// --------------------------------------------------------------------------
-
 static void save_rapidjson_small()
 {
     static const std::string file_path = base_path + "rapidjson_small.json";
@@ -111,42 +74,6 @@ static void bm_save_rapidjson_small(benchmark::State& state)
         save_rapidjson_small();
 }
 BENCHMARK(bm_save_rapidjson_small);
-
-// --------------------------------------------------------------------------
-
-static void save_rapidjson_medium()
-{
-    static const std::string file_path = base_path + "rapidjson_medium.json";
-
-    rapidjson::Document doc;
-    doc.Parse(medium_json_src.c_str());
-    save_file(doc, file_path.c_str());
-}
-
-static void bm_save_rapidjson_medium(benchmark::State& state)
-{
-    for (auto _ : state)
-        save_rapidjson_medium();
-}
-BENCHMARK(bm_save_rapidjson_medium);
-
-// --------------------------------------------------------------------------
-
-static void save_rapidjson_big()
-{
-    static const std::string file_path = base_path + "rapidjson_big.json";
-
-    rapidjson::Document doc;
-    doc.Parse(big_json_src.c_str());
-    save_file(doc, file_path.c_str());
-}
-
-static void bm_save_rapidjson_big(benchmark::State& state)
-{
-    for (auto _ : state)
-        save_rapidjson_big();
-}
-BENCHMARK(bm_save_rapidjson_big);
 
 // --------------------------------------------------------------------------
 
@@ -186,6 +113,60 @@ BENCHMARK(bm_save_yaml_cpp_small);
 
 // --------------------------------------------------------------------------
 
+static void save_pugixml_medium()
+{
+    static const std::string file_path = base_path + "pugixml_medium.xml";
+
+    pugi::xml_document doc;
+    doc.load(medium_xml_src.c_str());
+    doc.save_file(file_path.c_str(), "    ");
+}
+
+static void bm_save_pugixml_medium(benchmark::State& state)
+{
+    for (auto _ : state)
+        save_pugixml_medium();
+}
+BENCHMARK(bm_save_pugixml_medium);
+
+// --------------------------------------------------------------------------
+
+static void save_rapidjson_medium()
+{
+    static const std::string file_path = base_path + "rapidjson_medium.json";
+
+    rapidjson::Document doc;
+    doc.Parse(medium_json_src.c_str());
+    save_file(doc, file_path.c_str());
+}
+
+static void bm_save_rapidjson_medium(benchmark::State& state)
+{
+    for (auto _ : state)
+        save_rapidjson_medium();
+}
+BENCHMARK(bm_save_rapidjson_medium);
+
+// --------------------------------------------------------------------------
+
+static void save_rapidyaml_medium()
+{
+    static const std::string file_path = base_path + "rapidyaml_medium.yml";
+    static const ryml::csubstr yml_src(medium_yml_src.c_str());
+
+    ryml::Tree tree = ryml::parse_in_arena(yml_src);
+    save_file(tree, file_path.c_str());
+}
+
+static void bm_save_rapidyaml_medium(benchmark::State& state)
+{
+    for (auto _ : state)
+        save_rapidyaml_medium();
+}
+BENCHMARK(bm_save_rapidyaml_medium);
+
+// --------------------------------------------------------------------------
+
 static void save_yaml_cpp_medium()
 {
     static const std::string file_path = base_path + "yml-cpp_medium.yml";
@@ -201,6 +182,60 @@ static void bm_save_yaml_cpp_medium(benchmark::State& state)
         save_yaml_cpp_medium();
 }
 BENCHMARK(bm_save_yaml_cpp_medium);
+
+// --------------------------------------------------------------------------
+
+static void save_pugixml_big()
+{
+    static const std::string file_path = base_path + "pugixml_big.xml";
+
+    pugi::xml_document doc;
+    doc.load(big_xml_src.c_str());
+    doc.save_file(file_path.c_str(), "    ");
+}
+
+static void bm_save_pugixml_big(benchmark::State& state)
+{
+    for (auto _ : state)
+        save_pugixml_big();
+}
+BENCHMARK(bm_save_pugixml_big);
+
+// --------------------------------------------------------------------------
+
+static void save_rapidjson_big()
+{
+    static const std::string file_path = base_path + "rapidjson_big.json";
+
+    rapidjson::Document doc;
+    doc.Parse(big_json_src.c_str());
+    save_file(doc, file_path.c_str());
+}
+
+static void bm_save_rapidjson_big(benchmark::State& state)
+{
+    for (auto _ : state)
+        save_rapidjson_big();
+}
+BENCHMARK(bm_save_rapidjson_big);
+
+// --------------------------------------------------------------------------
+
+static void save_rapidyaml_big()
+{
+    static const std::string file_path = base_path + "rapidyaml_big.yml";
+    static const ryml::csubstr yml_src(big_yml_src.c_str());
+
+    ryml::Tree tree = ryml::parse_in_arena(yml_src);
+    save_file(tree, file_path.c_str());
+}
+
+static void bm_save_rapidyaml_big(benchmark::State& state)
+{
+    for (auto _ : state)
+        save_rapidyaml_big();
+}
+BENCHMARK(bm_save_rapidyaml_big);
 
 // --------------------------------------------------------------------------
 
